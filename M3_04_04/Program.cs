@@ -67,8 +67,24 @@ namespace BOOPM3_04_04
         bool IsLetter(char c) => c is >= 'a' and <= 'z'
                                     or >= 'A' and <= 'Z';
 
+
+        static string BMIConverter(decimal bmi) => bmi switch
+        {
+            < 18.5m => "underweight",
+            < 25m => "normal",
+            < 30m => "overweight",
+            35 => "BMI exactly 50",
+            _ => "obese"
+        };
+
         static void Main(string[] args)
         {
+
+            Console.WriteLine(BMIConverter(25));
+            Console.WriteLine(BMIConverter(45));
+            Console.WriteLine(BMIConverter(15));
+
+            /*
             //Relational Pattern with object type
             object obj = 2m;                  // decimal
             Console.WriteLine(obj is < 3m);  // True
@@ -106,6 +122,7 @@ namespace BOOPM3_04_04
 
             //Test Discard Pattern
             Console.WriteLine(VariousPatternMatching(100L));  // discarded
+            */
         }
     }
 
