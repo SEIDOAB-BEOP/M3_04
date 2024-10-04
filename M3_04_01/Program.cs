@@ -5,7 +5,7 @@ namespace BOOPM3_04_01
     class Program
     {
         //Base class or Parent class. 
-        public class Shape
+        abstract public class Shape
         {
             public double Width { get; set; }
             public double Height { get; set; }
@@ -15,27 +15,36 @@ namespace BOOPM3_04_01
         public class Triangle : Shape
         {
             public double Area => Width * Height / 2;
-            public bool Equals(Triangle t1) => (this.Width, this.Height) == (t1.Width, t1.Height);
- 
+
+            public override string ToString() => $"i am a {nameof(Triangle)} with area: {Area}";
+
         }
         // Rectangle is derived from Shape
         public class Rectangle : Shape
         {
             public double Area => Width * Height;
-            public bool Equals(Rectangle t1) => (this.Width, this.Height) == (t1.Width, t1.Height);
+            public override string ToString() => $"i am a {nameof(Rectangle)} with area: {Area}";
         }
+
+        public class Square : Rectangle{
+            public double Width { get => base.Width; set { base.Width = value; base.Height = value; } }
+            public double Height { get => base.Height; set{ base.Height = value; base.Width = value;} }
+
+            public override string ToString() => $"i am a {nameof(Square)} with area: {Area}, side: {Width}";
+        }
+
         static void Main(string[] args)
         {
             Triangle t1 = new Triangle() { Height = 100, Width = 200 };
-            Shape t2 = new Triangle() { Height = 100, Width = 200 };
+            System.Console.WriteLine(t1);
 
-            Shape r1 = new Shape() { Height = 100, Width = 200 };
-            //var r2 = (Rectangle) r1; //Exception
+            Rectangle r1 = new Rectangle() { Height = 100, Width = 200 };
+            System.Console.WriteLine(r1);
 
-            Console.WriteLine(t1.Area); // 10000
-            Console.WriteLine(((Triangle)t2).Area); // 10000
-            Console.WriteLine(((Shape)t2).Height); // 100
-           //Console.WriteLine(r2.Area()); //Exception
+            Square sq1 = new Square() { Height = 25};
+            System.Console.WriteLine(sq1);
+            Square sq2 = new Square() { Width = 50};
+            System.Console.WriteLine(sq2);
         }
     }
 
